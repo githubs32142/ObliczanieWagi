@@ -1,0 +1,6 @@
+﻿Paleta Chep biała-22.00;500@Paleta!
+Paleta przemysłowa-16.8;500@Paleta!
+IFCO16-1.25;10@Skrzynka!
+Skrzynaka platon-0.32;5@Skrzynka!
+F500H68-0.013;0.5@Panetka!
+tmp-12;321@Paleta!

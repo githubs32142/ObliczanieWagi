@@ -56,6 +56,7 @@ public class MainWindow extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         deleteRow = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("mainWindow"); // NOI18N
@@ -130,6 +131,13 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Edytuj");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -138,10 +146,12 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap(25, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(add, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(deleteRow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(20, 20, 20))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(add, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(deleteRow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton2))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,7 +162,9 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(add)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(deleteRow)))
+                        .addComponent(deleteRow)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)))
                 .addContainerGap(139, Short.MAX_VALUE))
         );
 
@@ -217,8 +229,8 @@ public class MainWindow extends javax.swing.JFrame {
         String name = "";
         Integer numOfItem = 0;
         Double weight = 0.0;
-        Double nettoW=0.0;
-        Double bruttoW=0.0;
+        Double nettoW = 0.0;
+        Double bruttoW = 0.0;
         if (!weightText.getText().isEmpty()) {
             if (table.getRowCount() >= 1) {
                 for (int i = 0; i < table.getRowCount(); i++) {
@@ -229,11 +241,10 @@ public class MainWindow extends javax.swing.JFrame {
                             weight += numOfItem * Double.parseDouble(pal.get(j).getWeight());
                         }
                     }
-                    try{
-                        bruttoW=Double.parseDouble(weightText.getText());
-                        nettoW=bruttoW-weight;
-                    }
-                    catch(NumberFormatException ex){
+                    try {
+                        bruttoW = Double.parseDouble(weightText.getText());
+                        nettoW = bruttoW - weight;
+                    } catch (NumberFormatException ex) {
                         JOptionPane.showMessageDialog(this, ex.getMessage(), "Andrzej Kierepka", JOptionPane.ERROR_MESSAGE);
                     }
                 }
@@ -243,9 +254,8 @@ public class MainWindow extends javax.swing.JFrame {
                         "Andrzej Kierepka",
                         JOptionPane.ERROR_MESSAGE);
             }
-        }
-        else{
-            JOptionPane.showMessageDialog(this,"Wprowadź wagę brutto jednostki logistycznej","Andrzej Kierepka",JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Wprowadź wagę brutto jednostki logistycznej", "Andrzej Kierepka", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -270,6 +280,17 @@ public class MainWindow extends javax.swing.JFrame {
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
         selectedRow = table.getSelectedRow();
     }//GEN-LAST:event_tableMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (selectedRow > 0 && selectedRow < table.getRowCount()) {
+            String input = JOptionPane.showInputDialog(null, "Wprowadź ilość sztuk:", "Andrzej Kierepka",
+                    JOptionPane.QUESTION_MESSAGE);
+            model.setValueAt(input, selectedRow, 1);
+        } else {
+            JOptionPane.showMessageDialog(this, "Wybierz odpowiedni wiersz", "Andrzej Kierepka", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -316,6 +337,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton add;
     private javax.swing.JButton deleteRow;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
